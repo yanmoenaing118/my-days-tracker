@@ -80,16 +80,17 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
     };
   });
 
+  const month = new Date().toDateString().split(" ")[1];
   return (
     <>
       <div className="p-1 md:p-4">
         <div className="calendar">
           <div className="flex justify-between bold mb-6 text-lg">
-            <h1 className="font-light uppercase text-green-700">
+            <h1 className="font-light text-sm md:text-base uppercase text-green-700">
               Productive Days Tracker
             </h1>
             <span className="underline text-sm">
-              {new Date().toDateString()}
+              {month} {currentYear}
             </span>
           </div>
           <div className="calendar_header grid grid-cols-7 gap-1 md:gap-2">
