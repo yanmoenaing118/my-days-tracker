@@ -86,7 +86,7 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
       <div className="p-1 md:p-4">
         <div className="calendar">
           <div className="flex justify-between bold mb-6 text-lg">
-            <h1 className="font-light text-sm md:text-base uppercase text-green-700">
+            <h1 className="font-bold text-sm md:text-base uppercase text-green-700">
               Productive Days Tracker
             </h1>
             <span className="underline text-sm">
@@ -95,7 +95,7 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
           </div>
           <div className="calendar_header grid grid-cols-7 gap-1 md:gap-2">
             {daysOfWeek.map((day) => (
-              <div className="text-sm md:text-base" key={day}>
+              <div className="font-bold text-center text-sm md:text-base" key={day}>
                 {day}
               </div>
             ))}
@@ -105,9 +105,8 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
               <div
                 key={idx}
                 className={classNames(
-                  "p-1 md:p-3 border",
-                  day?.myDay?.broke_rules && "border-red-700",
-                  day?.myDay?.daypassed && "border-b-green-700"
+                  "p-1 md:p-3 border shadow-sm rounded",
+                  day?.myDay?.daypassed && "border-b-green-700 border-b-2",
                 )}
               >
                 <div className="min-h-[60px]">
@@ -159,8 +158,8 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
       </div>
       <ReusableModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <MyDayForm
-          onSubmit={(data: MyDayType) => {
-            createMyDay({
+          onSubmit={async (data: MyDayType) => {
+            await createMyDay({
               id: Date.now(),
               day,
               month: currentMonth,
@@ -169,6 +168,7 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
               broke_rules: data.broke_rules,
               daypassed: true,
             });
+            setIsOpen(false);
           }}
         />
       </ReusableModal>
