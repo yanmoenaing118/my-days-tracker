@@ -95,7 +95,10 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
           </div>
           <div className="calendar_header grid grid-cols-7 gap-1 md:gap-2">
             {daysOfWeek.map((day) => (
-              <div className="font-bold text-center text-sm md:text-base" key={day}>
+              <div
+                className="font-bold text-center text-sm md:text-base"
+                key={day}
+              >
                 {day}
               </div>
             ))}
@@ -106,7 +109,7 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
                 key={idx}
                 className={classNames(
                   "p-1 md:p-3 border shadow-sm rounded",
-                  day?.myDay?.daypassed && "border-b-green-700 border-b-2",
+                  day?.myDay?.daypassed && "border-b-green-700 border-b-2"
                 )}
               >
                 <div className="min-h-[60px]">
@@ -137,13 +140,32 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
                       </div>
                       {day.myDay && (
                         <>
-                          <span>
-                            {day.myDay.productive ? (
+                          <div className="mb-2">
+                            {day.myDay.productive && !day.myDay?.broke_rules ? (
                               <ImCheckboxChecked size={18} color="green" />
                             ) : (
                               <ImCross size={18} color="red" />
                             )}
-                          </span>
+                          </div>
+                          {!day.myDay?.productive ? (
+                            <div className="text-red-700 text-[10px] hidden md:block">
+                              - unproductive
+                            </div>
+                          ) : (
+                            <div className="text-green-700 text-[10px] hidden md:block">
+                              - productive
+                            </div>
+                          )}
+
+                          {day.myDay?.broke_rules ? (
+                            <div className="text-red-700 text-[10px] hidden md:block">
+                              - undisciplined
+                            </div>
+                          ) : (
+                            <div className="text-green-700 text-[10px] hidden md:block">
+                              - disciplined
+                            </div>
+                          )}
                         </>
                       )}
                     </div>
