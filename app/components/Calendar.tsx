@@ -109,8 +109,13 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
             <h1 className="font-bold text-sm md:text-base uppercase text-green-700">
               Productive Days Tracker
             </h1>
-            <span className="underline text-sm" onClick={() => setCurrentMonth(now.getMonth())}>
-              <button>{month} {currentYear}</button>
+            <span
+              className="underline text-sm"
+              onClick={() => setCurrentMonth(now.getMonth())}
+            >
+              <button>
+                {month} {currentYear}
+              </button>
             </span>
           </div>
           <div className="calendar_header grid grid-cols-7 gap-1 md:gap-2">
@@ -129,7 +134,7 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
                 key={idx}
                 className={classNames(
                   "p-1 md:p-3 border shadow-sm rounded",
-                  day?.myDay?.daypassed && "border-b-green-700 border-b-2"
+                  day?.myDay?.daypassed && "border-b-gray-600 border-b-2"
                 )}
               >
                 <div className="min-h-[50px] md:min-h-[60px]">
@@ -166,12 +171,16 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
                       {day.myDay && (
                         <>
                           <div className="mb-2">
-                            {day.myDay.productive && !day.myDay?.broke_rules ? (
-                              <ImCheckboxChecked size={18} color="green" />
-                            ) : (
-                              <ImCross size={18} color="red" />
-                            )}
+                            {!day.myDay.productive &&
+                              day.myDay?.broke_rules && (
+                                <ImCross size={18} color="red" />
+                              )}
                           </div>
+                          {day.myDay.productive && (
+                            <div className="text-green-700 font-bold text-sm md:hidden">
+                              P
+                            </div>
+                          )}
                           {!day.myDay?.productive ? (
                             <div className="text-red-700 text-[10px] hidden md:block">
                               - unproductive
