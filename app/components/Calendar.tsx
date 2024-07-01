@@ -7,6 +7,7 @@ import { DayCellType, MyDayType } from "../utils/types";
 import { ImCheckboxChecked, ImCross, ImPencil } from "react-icons/im";
 import MyDayForm from "./MyDayForm";
 import { createMyDay } from "../utils/actions";
+import { GrNext, GrPrevious } from "react-icons/gr";
 
 // const myDays: MyDayType[] = [
 //   {
@@ -61,11 +62,29 @@ function getMyDay(
     (myDay) => myDay.month === month && myDay.year === year && myDay.day === day
   );
 }
+
+const noToMonthMap: {
+  [key: string]: string;
+} = {
+  "0": "January",
+  "1": "February",
+  "2": "March",
+  "3": "April",
+  "4": "May",
+  "5": "June",
+  "6": "July",
+  "7": "August",
+  "8": "September",
+  "9": "October",
+  "10": "November",
+  "11": "December",
+};
 export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
   const now = new Date();
 
-  const currentMonth = now.getMonth();
-  const currentYear = now.getFullYear();
+  const [currentMonth, setCurrentMonth] = useState(now.getMonth());
+  console.log(currentMonth);
+  const [currentYear, setCurrentYear] = useState(now.getFullYear());
   const daysCells = getDaysCells(currentMonth, currentYear);
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const [isOpen, setIsOpen] = useState(false);
@@ -81,16 +100,17 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
   });
 
   const month = new Date().toDateString().split(" ")[1];
+
   return (
     <>
-      <div className="p-1 md:p-4">
+      <div className="p-1 md:p-4 relative">
         <div className="calendar">
           <div className="flex justify-between bold mb-6 text-lg">
             <h1 className="font-bold text-sm md:text-base uppercase text-green-700">
               Productive Days Tracker
             </h1>
-            <span className="underline text-sm">
-              {month} {currentYear}
+            <span className="underline text-sm" onClick={() => setCurrentMonth(now.getMonth())}>
+              <button>{month} {currentYear}</button>
             </span>
           </div>
           <div className="calendar_header grid grid-cols-7 gap-1 md:gap-2">
@@ -112,7 +132,7 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
                   day?.myDay?.daypassed && "border-b-green-700 border-b-2"
                 )}
               >
-                <div className="min-h-[60px]">
+                <div className="min-h-[50px] md:min-h-[60px]">
                   {day.status === "day" ? (
                     <div>
                       <div className={classNames("flex justify-between")}>
@@ -126,6 +146,11 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
                         >
                           {day.day}
                         </div>
+                        {day.myDay && day.myDay.broke_rules && (
+                          <span className="text-red-500 font-bold text-sm">
+                            M
+                          </span>
+                        )}
                         {day.currentDay && !day.myDay && (
                           <button
                             onClick={() => {
@@ -176,6 +201,23 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
               </div>
             ))}
           </div>
+        </div>
+        <div className="fixed w-full bottom-20 left-1/2 -translate-x-1/2 mt-4 max-w-80 mx-auto flex justify-between items-center">
+          <button
+            className="cursor-pointer p-2 rounded-md text-white bg-gray-400"
+            onClick={() => setCurrentMonth(currentMonth - 1)}
+            disabled={currentMonth <= 0}
+          >
+            <GrPrevious />
+          </button>
+          <span className="font-bold">{noToMonthMap[`${currentMonth}`]}</span>
+          <button
+            className="cursor-pointer p-2 rounded-md text-white bg-gray-400"
+            onClick={() => setCurrentMonth(currentMonth + 1)}
+            disabled={currentMonth >= 11}
+          >
+            <GrNext />
+          </button>
         </div>
       </div>
       <ReusableModal isOpen={isOpen} onClose={() => setIsOpen(false)}>

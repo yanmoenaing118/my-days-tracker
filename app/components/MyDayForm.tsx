@@ -11,7 +11,7 @@ export default function MyDayForm({ onSubmit }: any ) {
   }
 
   return (
-    <section className="min-w-[320px]">
+    <section className="min-w-[310px]">
       <header className="mb-4 font-bold">{currentDate.toDateString()}</header>
       <article>
         <form onSubmit={handlSubmit}>
