@@ -2,7 +2,7 @@
 import classNames from "classnames";
 import { getDaysCells } from "../utils/calendar";
 import ReusableModal from "./Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DayCellType, MyDayType } from "../utils/types";
 import { ImCheckboxChecked, ImCross, ImPencil } from "react-icons/im";
 import MyDayForm from "./MyDayForm";
@@ -92,7 +92,7 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
 
   const days = daysCells.map((cell) => {
     const myDay = getMyDay(cell.day, currentMonth, currentYear, myDays);
-    console.log(myDay);
+    // console.log(myDay);
     return {
       ...cell,
       myDay: myDay,
@@ -100,6 +100,11 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
   });
 
   const month = new Date().toDateString().split(" ")[1];
+
+  useEffect(() => {
+    console.log(myDays)
+    console.log(days)
+  },[myDays])
 
   return (
     <>
