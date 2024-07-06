@@ -196,7 +196,7 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
                             </div>
                           )}
 
-                          {day.myDay?.broke_rules ? (
+                          {/* {day.myDay?.broke_rules ? (
                             <div className="text-red-700 text-[10px] hidden md:block">
                               - undisciplined
                             </div>
@@ -204,7 +204,7 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
                             <div className="text-green-700 text-[10px] hidden md:block">
                               - disciplined
                             </div>
-                          )}
+                          )} */}
                         </>
                       )}
                     </div>
