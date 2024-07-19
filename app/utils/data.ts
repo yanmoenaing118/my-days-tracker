@@ -10,12 +10,12 @@ export async function fetchMydays() {
     // Artificially delay a response for demo purposes.
     // Don't do this in production :)
 
-    console.log("Fetching revenue data...");
+    // console.log("Fetching revenue data...");
     // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<MyDayType>`SELECT * FROM mydays`;
 
-    console.log("Data fetch completed after 3 seconds.", data.rows);
+    // console.log("Data fetch completed after 3 seconds.", data.rows);
 
     return data.rows;
   } catch (error) {

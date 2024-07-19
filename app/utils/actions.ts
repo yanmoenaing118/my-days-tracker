@@ -14,7 +14,7 @@ import { MyDayType } from "./types";
 // dayPassed: true,
 
 export async function createMyDay(data: MyDayType) {
-  console.log("data", data);
+  // console.log("data", data);
   const { id, day, month, year, productive, broke_rules, daypassed } = data;
 
 

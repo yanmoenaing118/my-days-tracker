@@ -102,8 +102,8 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
   const month = new Date().toDateString().split(" ")[1];
 
   useEffect(() => {
-    console.log(myDays)
-    console.log(days)
+    // console.log(myDays)
+    // console.log(days)
   },[myDays])
 
   return (
