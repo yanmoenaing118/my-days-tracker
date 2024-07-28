@@ -24,7 +24,7 @@ export async function createMyDay(data: MyDayType) {
 `;
 
   revalidatePath("/");
-  redirect("/");
+  redirect("/?xxx=" + process.env.AUTH_SECRET);
 }
 
 // const UpdateInvoice = FormSchema.omit({ id: true, date: true });
