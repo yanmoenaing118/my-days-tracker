@@ -188,11 +188,11 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
                           )}
                           {!day.myDay?.productive ? (
                             <div className="text-red-700 font-bold text-2xl hidden md:block">
-                              - unproductive
+                              unproductive
                             </div>
                           ) : (
                             <div className="text-green-700 font-bold text-2xl hidden md:block">
-                              - productive
+                              productive
                             </div>
                           )}
 
