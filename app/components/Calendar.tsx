@@ -8,6 +8,7 @@ import { ImCheckboxChecked, ImCross, ImPencil } from "react-icons/im";
 import MyDayForm from "./MyDayForm";
 import { createMyDay } from "../utils/actions";
 import { GrNext, GrPrevious } from "react-icons/gr";
+import SwitchTheme from "./SwitchTheme";
 
 // const myDays: MyDayType[] = [
 //   {
@@ -104,24 +105,25 @@ export default function Calendar({ myDays }: { myDays: MyDayType[] }) {
   useEffect(() => {
     // console.log(myDays)
     // console.log(days)
-  },[myDays])
+  }, [myDays]);
 
   return (
     <>
       <div className="p-1 md:p-4 relative">
         <div className="calendar">
           <div className="flex justify-between bold mb-6 text-lg">
-            <h1 className="font-bold text-sm md:text-base uppercase text-green-700">
-              Productive Days Tracker
-            </h1>
             <span
-              className="underline text-sm"
+              className="font-bold text-lg underline"
               onClick={() => setCurrentMonth(now.getMonth())}
             >
               <button>
                 {month} {currentYear}
               </button>
             </span>
+            <h1 className="font-bold text-sm md:text-base uppercase text-green-700">
+              My Days
+            </h1>
+            <SwitchTheme />
           </div>
           <div className="calendar_header grid grid-cols-7 gap-1 md:gap-2">
             {daysOfWeek.map((day) => (
