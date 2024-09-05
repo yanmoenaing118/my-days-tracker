@@ -11,16 +11,19 @@ import { MyDayType } from "./types";
 
 // productive: false,
 // broke_rules: false,
-// dayPassed: true,
+// dayPassed: true
 
 export async function createMyDay(data: MyDayType) {
   // console.log("data", data);
   const { id, day, month, year, productive, broke_rules, daypassed } = data;
 
-
+  console.log(`
+    INSERT INTO mydays (day, month, year, productive, broke_rules, daypassed)
+  VALUES (${day}, ${month}, ${year}, ${productive === "true"}, ${broke_rules === "true"}, ${daypassed})
+    `);
   await sql`
   INSERT INTO mydays (day, month, year, productive, broke_rules, daypassed)
-  VALUES (${day}, ${month}, ${year}, ${productive === 'true'}, ${broke_rules === 'true'}, ${daypassed});
+  VALUES (${day}, ${month}, ${year}, ${productive === "true"}, ${broke_rules === "true"}, ${daypassed});
 `;
 
   revalidatePath("/");
